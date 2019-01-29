@@ -1,0 +1,27 @@
+{
+  "name": "node-chat-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "engines": {
+    "node": "10.13.0"
+  },
+  "author": "aaron shivers",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaronshivers/node-chat-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aaronshivers/node-chat-app/issues"
+  },
+  "homepage": "https://github.com/aaronshivers/node-chat-app#readme"
+}
