@@ -10,6 +10,8 @@
   </head>
   <body class="chat">
 
+    <h1 id="output"></h1>
+
     <div class="chat__sidebar">
       
       <h3>People</h3>
@@ -39,6 +41,32 @@
     </div>
 
     <!-- JavaScript -->
+    <script id="message-template" type="text/template">
+      <li class="message">
+        <div class="message__title">
+          <h4><%= from %></h4>
+          <span><%= createdAt %></span>
+        </div>
+        <div class="message__body">
+          <p><%= text %></p>
+        </div>
+      </li>
+    </script>
+
+    <script id="location-message-template" type="text/template">
+      <li class="message">
+        <div class="message__title">
+          <h4><%= from %></h4>
+          <span><%= createdAt %></span>
+        </div>
+        <div class="message__body">
+          <a href="<%= url %>" target="_blank">My current location</a>
+        </div>
+      </li>
+    </script>
+
+
+    <script src="/js/libs/ejs.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/index.js"></script>
     <script src="/js/libs/moment.js"></script>

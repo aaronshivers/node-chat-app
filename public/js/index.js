@@ -8,28 +8,35 @@ socket.on('disconnect', () => {
   console.log('Disconnected from server.')
 })
 
+
 socket.on('newMessage', (message) => {
-  const formattedTime = moment(message.createdAt).format('h:mm a')
-  const { from, text } = message
+  const template = document.getElementById('message-template').innerHTML
   const messages = document.getElementById('messages')
   const li = document.createElement('li')
-  li.textContent = `${ from } ${ formattedTime }: ${ text }`
-  messages.appendChild(li).classList.add('list-group-item')
-  console.log('New Message:', message)
+  const formattedTime = moment(message.createdAt).format('h:mm a')
+  const html = ejs.render(template, {
+    text: message.text,
+    from: message.from,
+    createdAt: formattedTime
+  })
+  
+  li.innerHTML = html
+  messages.appendChild(li)
 })
 
 socket.on('newLocationMessage', (message) => {
-  const formattedTime = moment(message.createdAt).format('h:mm a')
-  const { from, url } = message
+  const template = document.getElementById('location-message-template').innerHTML
   const messages = document.getElementById('messages')
   const li = document.createElement('li')
-  const a = document.createElement('a')
+  const formattedTime = moment(message.createdAt).format('h:mm a')
+  const html = ejs.render(template, {
+    from: message.from,
+    url: message.url,
+    createdAt: formattedTime
+  })
   
-  messages.appendChild(li).classList.add('list-group-item')
-
-  li.innerHTML = `${ from } ${ formattedTime }: <a href="${ url }">Here's my location!</a>`
-
-  console.log('New Location Message:', message)
+  li.innerHTML = html
+  messages.appendChild(li)
 })
 
 document.getElementById('message-form').addEventListener('submit', e => {
