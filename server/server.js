@@ -1,21 +1,14 @@
-require('dotenv').config()
-
 const http = require('http')
 const express = require('express')
 const socketIO = require('socket.io')
 
-const { generateMessage } = require('./utils/message')
-const { PORT } = process.env
+const { generateMessage, generateLocationMessage } = require('./utils/message')
+const PORT = process.env.PORT || 3000
 const app = express()
 const server = http.createServer(app)
 const io = socketIO(server)
 
 app.use(express.static('public'))
-
-// app.get('/', (req, res) => {
-//   const { newMessage } = req.query
-//   console.log(req.query)
-// })
 
 io.on('connection', (socket) => {
 
@@ -29,6 +22,11 @@ io.on('connection', (socket) => {
     console.log('createMessage', message)
     io.emit('newMessage', generateMessage(message.from, message.text))
     callback('This is from the server.')
+  })
+
+  socket.on('createLocationMessage', (latitude, longitude) => {
+    const url = `https://www.google.com/maps/search/?api=1&query=${ latitude },${ longitude }`
+    io.emit('newLocationMessage', generateLocationMessage('Admin', url))
   })
 
   socket.on('disconnect', () => {

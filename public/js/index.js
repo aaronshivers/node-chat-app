@@ -17,6 +17,19 @@ socket.on('newMessage', (message) => {
   console.log('New Message:', message)
 })
 
+socket.on('newLocationMessage', (message) => {
+  const { from, url } = message
+  const messages = document.getElementById('messages')
+  const li = document.createElement('li')
+  const a = document.createElement('a')
+  
+  messages.appendChild(li).classList.add('list-group-item')
+
+  li.innerHTML = `${ from }: <a href="${ url }">Here's my location!</a>`
+
+  console.log('New Location Message:', message)
+})
+
 document.getElementById('message-form').addEventListener('submit', e => {
   e.preventDefault()
 
@@ -28,9 +41,18 @@ document.getElementById('message-form').addEventListener('submit', e => {
   })
 })
 
-// socket.emit('createMessage', {
-//   from: 'Frank',
-//   text: 'Hello'
-// }, (data) => {
-//   console.log('Messge was received: ', data)
-// })
+const locationButton = document.getElementById('send-location')
+
+locationButton.addEventListener('click', e => {
+
+  if ('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition(position => {
+      const { latitude, longitude } = position.coords
+      socket.emit('createLocationMessage', latitude, longitude)
+    }, () => {
+      alert('Unable to fetch location.')
+    })
+  } else {
+    return alert('Geolocation is not supported by your browser.')
+  }
+})
