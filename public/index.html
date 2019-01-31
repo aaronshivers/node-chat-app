@@ -3,50 +3,47 @@
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 
     <title>Node Chat App</title>
   </head>
-  <body>
-    <div class="container">
+  <body class="chat">
+
+    <div class="chat__sidebar">
       
-      <h1>Node Chat App</h1>
+      <h3>People</h3>
 
-      <div id="messages" class="list-group"></div>
+      <div id="users"></div>
 
-      <form id="message-form" class="form" action="/" method="GET">
+    </div>
+
+    <div class="chat__main">
+
+      <ol id="messages" class="chat__messages"></ol>
+
+      <div class="chat__footer">
         
-        <div class="form-group">
-          <label for="message">Create New Message</label>
-          <input id="message" class="form-control" type="text" name="message" placeholder="Message...">
-        </div>
+        <form id="message-form">
+          
+          <input id="message" type="text" name="message" placeholder="Message..." autofocus autocomplete="off">
 
-        <button class="btn btn-primary btn-block btn-lg">Send Message</button>
+          <button>Send</button>
 
-      </form>
+        </form>
+
+        <button id="send-location">Send Location</button>
+
+      </div>
       
-      <button id="send-location" class="btn btn-warning btn-block btn-lg mt-3">Send Location</button>
-
-
     </div>
 
     <!-- socket.io JavaScript -->
     <script src="/socket.io/socket.io.js"></script>
 
+    <!-- Local JavaScript -->
     <script src="/js/index.js"></script>
 
-    <!-- <script src="/js/libs/jquery-3.3.1.slim.min.js"></script> -->
-    <!-- <script src="/js/libs/jquery-3.3.1.slim.min.js"></script> -->
-
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script> -->
-    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
   </body>
+
 </html>

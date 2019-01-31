@@ -21,6 +21,7 @@ describe('generateLocationMessage', () => {
     const url = `https://www.google.com/maps/search/?api=1&query=${ latitude },${ longitude }`
     const message = generateLocationMessage(from, url)
     
+    expect(typeof message.createdAt).toBe('number')
     expect(message).toMatchObject({ from, url })
   })
 })

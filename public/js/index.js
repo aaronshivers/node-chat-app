@@ -32,24 +32,37 @@ socket.on('newLocationMessage', (message) => {
 
 document.getElementById('message-form').addEventListener('submit', e => {
   e.preventDefault()
+  const messageTextBox = document.getElementById('message')
 
   socket.emit('createMessage', {
     from: 'User',
-    text: document.getElementById('message').value
+    text: message.value
   }, () => {
-
+    messageTextBox.value = ''
   })
 })
 
 const locationButton = document.getElementById('send-location')
 
+
 locationButton.addEventListener('click', e => {
+  const enableLocationButton = () => {
+    setTimeout(() => {
+      locationButton.disabled = false
+      locationButton.textContent = 'Send Location'
+    }, 10000)
+  }
 
   if ('geolocation' in navigator) {
+    locationButton.disabled = true
+    locationButton.textContent = 'Sending Location...'
+
     navigator.geolocation.getCurrentPosition(position => {
+      enableLocationButton()
       const { latitude, longitude } = position.coords
       socket.emit('createLocationMessage', latitude, longitude)
     }, () => {
+      enableLocationButton()
       alert('Unable to fetch location.')
     })
   } else {
