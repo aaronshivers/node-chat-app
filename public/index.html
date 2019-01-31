@@ -1,72 +1,29 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-
-    <title>Node Chat App</title>
-  </head>
-  <body class="chat">
-
-    <h1 id="output"></h1>
-
-    <div class="chat__sidebar">
-      
-      <h3>People</h3>
-
-      <div id="users"></div>
-
-    </div>
-
-    <div class="chat__main">
-
-      <ol id="message-list" class="chat__messages"></ol>
-
-      <div class="chat__footer">
-        
-        <form id="message-form">
-          
-          <input id="message" type="text" name="message" placeholder="Message..." autofocus autocomplete="off">
-
-          <button>Send</button>
-
-        </form>
-
-        <button id="send-location">Send Location</button>
-
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>Join | Chat App</title>
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body class="centered-form">
+  <div class="centered-form__form">
+    <form action="/chat.html">
+      <div class="form-field">
+        <h3>Join a Chat Room</h3>
       </div>
-      
-    </div>
-
-    <!-- JavaScript -->
-    <script id="message-template" type="text/template">
-        <div class="message__title">
-          <h4><%= from %></h4>
-          <span><%= createdAt %></span>
-        </div>
-        <div class="message__body">
-          <p><%= text %></p>
-        </div>
-    </script>
-
-    <script id="location-message-template" type="text/template">
-        <div class="message__title">
-          <h4><%= from %></h4>
-          <span><%= createdAt %></span>
-        </div>
-        <div class="message__body">
-          <a href="<%= url %>" target="_blank">My current location</a>
-        </div>
-    </script>
-
-
-    <script src="/js/libs/ejs.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/index.js"></script>
-    <script src="/js/libs/moment.js"></script>
-
-  </body>
-
+      <div class="form-field">
+        <label>User Name</label>
+        <input type="text" name="name" autofocus>
+      </div>
+      <div class="form-field">
+        <label>Room Name</label>
+        <input type="text" name="room">
+      </div>
+      <div class="form-field">
+        <button>Join</button>
+      </div>
+    </form>
+  </div>
+</body>
 </html>
