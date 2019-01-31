@@ -9,15 +9,17 @@ socket.on('disconnect', () => {
 })
 
 socket.on('newMessage', (message) => {
+  const formattedTime = moment(message.createdAt).format('h:mm a')
   const { from, text } = message
   const messages = document.getElementById('messages')
   const li = document.createElement('li')
-  li.textContent = `${from}: ${text}`
+  li.textContent = `${ from } ${ formattedTime }: ${ text }`
   messages.appendChild(li).classList.add('list-group-item')
   console.log('New Message:', message)
 })
 
 socket.on('newLocationMessage', (message) => {
+  const formattedTime = moment(message.createdAt).format('h:mm a')
   const { from, url } = message
   const messages = document.getElementById('messages')
   const li = document.createElement('li')
@@ -25,7 +27,7 @@ socket.on('newLocationMessage', (message) => {
   
   messages.appendChild(li).classList.add('list-group-item')
 
-  li.innerHTML = `${ from }: <a href="${ url }">Here's my location!</a>`
+  li.innerHTML = `${ from } ${ formattedTime }: <a href="${ url }">Here's my location!</a>`
 
   console.log('New Location Message:', message)
 })
