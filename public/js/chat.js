@@ -17,13 +17,36 @@ const scrollToBottom = () => {
 }
 
 socket.on('connect', () => {
-  console.log('Connected to server.')
+  const params = {}
+  const searchParams = new URLSearchParams(window.location.search)
+
+  for (const [key, value] of searchParams) {
+    params[key.trim().toLowerCase()] = value.trim().toLowerCase()
+  }
+
+  socket.emit('join', params, (err) => {
+    if (err) {
+      alert(err)
+      window.location.href = '/'
+    } else {
+      console.log('No error')
+    }
+  })
 })
 
-socket.on('disconnect', () => {
-  console.log('Disconnected from server.')
+socket.on('disconnect', (users) => {
+
 })
 
+socket.on('updateUserList', (users) => {
+  const usersList = document.getElementById('users-list')
+
+  usersList.innerHTML = ''
+
+  for (const user of users) {
+    usersList.innerHTML += `<li>${user}</li>`
+  }
+})
 
 socket.on('newMessage', (message) => {
   const template = document.getElementById('message-template').innerHTML
